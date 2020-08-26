@@ -25,6 +25,7 @@ function bundleFesm2015Module(name: string) {
   return bundle({
     src: `${LIB_DIR}/${name}/esm2015/**/*.js`,
     moduleName: `nb.${name}`,
+    amdId: `@nebular/${name}`,
     entry: `${LIB_DIR}/${name}/esm2015/index.js`,
     format: 'es',
     output: `index.js`,
@@ -36,6 +37,7 @@ function bundleUmdModule(name: string) {
   return bundle({
     src: `${LIB_DIR}/${name}/esm2015/**/*.js`,
     moduleName: `nb.${name}`,
+    amdId: `@nebular/${name}`,
     entry: `${LIB_DIR}/${name}/esm2015/index.js`,
     format: 'umd',
     output: `${name}.umd.js`,
@@ -49,6 +51,9 @@ function bundle(config: any) {
       moduleName: config.moduleName,
       entry: config.entry,
       format: config.format,
+      amd: {
+        id: config.amdId,
+      },
     })))
     .pipe(rename(config.output))
     .pipe(dest(config.dest));
